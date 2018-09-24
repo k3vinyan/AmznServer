@@ -8,6 +8,7 @@ const scanSchema = new Schema({
   tba: String,
   route: String,
   shift: String,
+  cluster: String,
   date: { type: Date, default: Date.now }
 });
 
