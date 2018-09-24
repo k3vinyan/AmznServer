@@ -25,6 +25,17 @@ router.post('/', (req, res, next) => {
     tba: tba,
     route: route,
   })
+
+  miss.save()
+    .then(data => {
+      res.send("data: " + data)
+    })
+    .catch(err => {
+      res.sendStatus(500).json({
+        error: err
+      })
+    })
+
 })
 
 module.exports = router;
