@@ -24,7 +24,7 @@ router.post('/', (req, res, next) => {
     _id: new mongoose.Types.ObjectId(),
     tba: tba,
     route: route,
-    cluser: req.body.route.replace(/\d+/g, "")
+    cluster: req.body.route.replace(/\d+/g, "")
   })
 
   miss.save()
