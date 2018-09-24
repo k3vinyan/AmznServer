@@ -45,8 +45,6 @@ router.get('/exclude/:route', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
-  const route = req.body.route;
-
 
   Scan.estimatedDocumentCount({}, function(err, c){
     return c;
@@ -56,7 +54,7 @@ router.post('/', (req, res, next) => {
       _id: new mongoose.Types.ObjectId(),
       tba: req.body.tba,
       route: req.body.route,
-      cluster: cluster,
+      cluster: req.params.replace(/\d+/g, ''),
       entry: count
     })
 
