@@ -1,5 +1,5 @@
 {
-  "name": "amazon server",
+  "name": "amazonserver",
   "version": "1.0.0",
   "description": "Reciever Server",
   "main": "index.js",
