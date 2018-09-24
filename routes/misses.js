@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Miss = require('../models/miss');
 
 router.get('/', (req, res, next) => {
-   Scan.find({})
+   Miss.find({})
     .then(data => {
       res.send(data)
     })
