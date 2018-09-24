@@ -17,7 +17,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/include/:route', (req, res, next) => {
-  const cluster = req.params.replace(/\d+/g, '');
+  const cluster = req.params.route;
+  console.log(req.params)
   console.log(cluster)
   Scan.find({cluster: cluster})
     .then(data => {
