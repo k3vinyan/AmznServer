@@ -54,7 +54,7 @@ router.post('/', (req, res, next) => {
       _id: new mongoose.Types.ObjectId(),
       tba: req.body.tba,
       route: req.body.route,
-      cluster: req.params.replace(/\d+/g, ''),
+      cluster: req.body.route.replace(/\d+/g, ''),
       entry: count
     })
 
