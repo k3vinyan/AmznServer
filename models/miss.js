@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const scanSchema = new Schema({
+const missSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
   tba: String,
   route: String,
