@@ -14,12 +14,40 @@ router.get('/', (req, res, next) => {
         error: err
       })
     })
+});
+
+router.get('/include/:route', (req, res, next) => {
+  const cluster = req.params.replace(/\d+/g, '');
+  Scan.find({cluster: cluster})
+    .then(data => {
+      res.send(data)
+    })
+    .catch(err => {
+      res.sendStatus(500).json({
+        error: err
+      })
+    })
 })
 
+router.get('/exclude/:route', (req, res, next) => {
+  const cluster = req.params.replace(/\d+/g, '');
+  Scan.find({cluster: { $not: cluster}})
+    .then(data => {
+      res.send(data)
+    })
+    .catch(err => {
+      res.sendStatus(500).json({
+        error: err
+      })
+    })
+})
+
+
+
 router.post('/', (req, res, next) => {
-  console.log(req)
-  console.log(req.body.tba);
-  console.log(req.body.tba);
+  const route = req.body.route;
+
+
   Scan.estimatedDocumentCount({}, function(err, c){
     return c;
   })
@@ -28,6 +56,7 @@ router.post('/', (req, res, next) => {
       _id: new mongoose.Types.ObjectId(),
       tba: req.body.tba,
       route: req.body.route,
+      cluster: cluster,
       entry: count
     })
 
@@ -41,6 +70,19 @@ router.post('/', (req, res, next) => {
         })
       })
   })
-})
+});
+
+router.get('/deleteAll', () =>{
+  Scan.deleteMany()
+    .save()
+    .then( ()=>{
+      res.send("db deleted")
+    })
+    .catch(err => {
+      res.sendStatus(500).json({
+        error: err
+      })
+    })
+});
 
 module.exports = router;
