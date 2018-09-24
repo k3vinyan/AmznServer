@@ -16,10 +16,9 @@ router.get('/', (req, res, next) => {
     })
 });
 
-router.get('/include/:route', (req, res, next) => {
-  const cluster = req.params.route;
-  console.log(req.params)
-  console.log(cluster)
+router.get('/include/:cluster', (req, res, next) => {
+  const cluster = req.params.cluster;
+
   Scan.find({cluster: cluster})
     .then(data => {
       res.send(data)
@@ -32,7 +31,7 @@ router.get('/include/:route', (req, res, next) => {
 })
 
 router.get('/exclude/:route', (req, res, next) => {
-  const cluster = req.params.replace(/\d+/g, '');
+  const cluster = req.params.cluster
   Scan.find({cluster: { $not: cluster}})
     .then(data => {
       res.send(data)
