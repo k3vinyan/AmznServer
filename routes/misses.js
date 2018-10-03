@@ -19,7 +19,6 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const tba = req.body.tba;
   const route = req.body.route;
-  const cluster = req.body.route.replace(/\d+/g, "")
 
   const miss = new Miss({
     _id: new mongoose.Types.ObjectId(),
