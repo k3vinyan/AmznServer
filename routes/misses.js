@@ -26,7 +26,7 @@ router.post('/', (req, res, next) => {
     tba: tba,
     route: route,
     cluser: cluster
-  })
+  });
 
   router.get('/deleteAll', (req, res, next) => {
     Miss.deleteMany()
@@ -39,7 +39,7 @@ router.post('/', (req, res, next) => {
           error: err
         })
       })
-  })
+  });
 
   miss.save()
     .then(data => {
