@@ -28,6 +28,19 @@ router.post('/', (req, res, next) => {
     cluser: cluster
   })
 
+  router.get('/deleteAll', (req, res, next) => {
+    Miss.deleteMany()
+      .save()
+      .then( ()=>{
+        res.send("Miss deleted")
+      })
+      .catch(err => {
+        res.sendStatus(500).json({
+          error: err
+        })
+      })
+  })
+
   miss.save()
     .then(data => {
       res.send("data: " + data)
