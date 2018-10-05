@@ -7,6 +7,7 @@ const missSchema = new Schema({
   route: String,
   shift: String,
   cluster: String,
+  entry: String,
   date: { type: Date, default: Date.now }
 });
 

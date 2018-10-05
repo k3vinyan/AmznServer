@@ -71,10 +71,9 @@ router.post('/', (req, res, next) => {
   })
 });
 
-router.get('/deleteAll', () =>{
+router.get('/deleteAll', (req, res) =>{
   Scan.deleteMany()
-    .save()
-    .then( ()=>{
+    .then((data)=>{
       res.send("db deleted")
     })
     .catch(err => {

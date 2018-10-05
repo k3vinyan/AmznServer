@@ -20,25 +20,17 @@ router.post('/', (req, res, next) => {
   const tba = req.body.tba;
   const route = req.body.route;
 
-  const miss = new Miss({
-    _id: new mongoose.Types.ObjectId(),
-    tba: tba,
-    route: route,
-    cluser: cluster
-  });
-
-  router.get('/deleteAll', (req, res, next) => {
-    Miss.deleteMany()
-      .save()
-      .then( ()=>{
-        res.send("Miss deleted")
-      })
-      .catch(err => {
-        res.sendStatus(500).json({
-          error: err
-        })
-      })
-  });
+  Miss.estimatedDocumentCount({}, function(err, c){
+    return c;
+  })
+  .then(count => {
+    const miss = new Miss({
+      _id: new mongoose.Types.ObjectId(),
+      tba: tba,
+      route: route,
+      cluser: route.replace(/\d+/g, ''),
+      entry: count
+    })
 
   miss.save()
     .then(data => {
@@ -49,7 +41,19 @@ router.post('/', (req, res, next) => {
         error: err
       })
     })
-
+  })
 })
+
+router.get('/deleteAll', (req, res, next) =>{
+  Miss.deleteMany()
+    .then((data)=>{
+      res.send("db deleted")
+    })
+    .catch(err => {
+      res.sendStatus(500).json({
+        error: err
+      })
+    })
+});
 
 module.exports = router;
